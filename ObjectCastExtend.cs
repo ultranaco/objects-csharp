@@ -29,7 +29,13 @@ namespace Ultranaco.Objects
 
     public static int GetInt32(this object obj, int defaultValue = 0)
     {
-      return obj as int? != null ? (int)obj : defaultValue;
+      try
+      {
+        return Convert.ToInt32(obj);
+      }catch
+      {
+        return defaultValue;
+      }
     }
 
     public static long GetLong(this object obj, long defaultValue = 0)
