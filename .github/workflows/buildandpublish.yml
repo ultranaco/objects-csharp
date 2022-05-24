@@ -28,14 +28,9 @@ jobs:
         run: dotnet test -c Release --no-build --verbosity normal
       - name: Pack
         run: dotnet pack -c Release
-      - name: View Contents
-        run: tree
       - name: Publish Nuget to GitHub registry
         run: dotnet nuget push ./bin/Release/*.nupkg --source "https://api.nuget.org/v3/index.json" --api-key ${NUGET_TOKEN} --skip-duplicate --no-symbols
         env:
           NUGET_TOKEN: ${{ secrets.NUGET_TOKEN }}
-
-      - name: Restore
-        run: |
-          echo Finish,
-          echo Build and deploy.
+      - name: View Contents
+        run: tree
