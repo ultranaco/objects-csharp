@@ -39,8 +39,10 @@ jobs:
         run: dotnet build -c Release --no-restore
       - name: Pack
         run: dotnet pack -c Release
+      - name: View Contents
+        run: tree
       - name: Publish Nuget to GitHub registry
-        run: dotnet nuget push ./bin/Release/*.nupkg -k ${NUGET_TOKEN} -s https://api.nuget.org/v3/index.json --skip-duplicate --no-symbols
+        run: dotnet nuget push ./bin/Release/*.nupkg --source "https://api.nuget.org/v3/index.json" --api-key ${NUGET_TOKEN} --skip-duplicate --no-symbols
         env:
           NUGET_TOKEN: ${{ secrets.NUGET_TOKEN }}
 
